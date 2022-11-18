@@ -65,7 +65,57 @@ ORA-01858: 숫자가 있어야 하는 위치에서 숫자가 아닌 문자가 발견되었습니다.
 SELECT SYSDATE
 FROM dual;
           
-          
 SELECT employee_id 사번, last_name 성, department_id 부서, hire_date 입사일
 FROM employees
-WHERE hire_date < '04/01/01'; --년/월/일  
+WHERE hire_date < '04/01/01'; --년/월/일 
+
+
+
+--데이터베이스 설정 보기
+--NLS : national language support :  나라별/ 언어별 설정 지원
+-- 1.현재 NLS 세팅 확인
+SELECT *
+FROM V$nls_parameters;
+
+-- 2. sqlDeveloper > 도구 > 환경설정 > 데이터베이스 >  NLS를 확인
+
+2.3.4 AND, OR, NOT 논리 조건 연산자
+-- 여러개의 조건이 오는 경우 필요한 연산자
+-- AND 연산은 조건이 모두 TRUE일 때, 최종 TRUE를 반환 
+-- OR 연산은 조건이 하나라도 TRUE일 때, 최종 TRUE를 반환 
+-- NOT 연산은 조건이 TRUE면 FALSE를 FALSE면 TRUE를 반환
+
+[예제2-13] 30번 부서 사원중 급여가 10000 이하인 사원의 정보를 조회하시오
+(사번, 이름, 급여, 부서코드를 뜻함)
+SELECT employee_id, last_name, first_name, Salary, department_id
+FROM employees
+WHERE department_id=30 
+AND Salary <= 10000;
+
+--Q. Den 이라는 사람, 사번이 114 인 사람의 정보를 추가 조회하시오
+SELECT employee_id, last_name, first_name, Salary, department_id
+FROM employees
+WHERE employee_id = 114;
+
+[예제 2-13] 30번 부서 사원중 급여가 10000 이하면서 2005년 이전에 입사한 직원의 정보를 조회하시오
+SELECT 'hanul' company, employee_id, last_name, first_name, Salary, department_id
+FROM employees
+WHERE department_id = 30
+and Salary <= 10000
+and hire_date <= '04-12-31';
+
+
+-- OR 연산은 조건이 하나라도 TRUE일 때, 최종 TRUE를 반환 
+[예제 2-15] 30번 부서나 60번 부서에 속한 사원의 정보를 조회하시오
+--부서 VS 사원의 관계 <---> 오라클 RDBMS(Reational DBMS, 관계형 데이터베이스 시스템) <---> 테이블 ~ 테이블 관계
+SELECT 'eunji' company, employee_id, last_name, first_name, Salary, department_id
+FROM employees
+WHERE department_id = 30
+OR department_id = 60;
+
+
+
+
+
+
+-- NOT 연산은 조건이 TRUE면 FALSE를 FALSE면 TRUE를 반환
