@@ -113,6 +113,8 @@ FROM employees
 WHERE department_id = 30
 OR department_id = 60;
 
+--[예제 2-16] 30번 부서의 급여가 10000미만인 사원과 60번 부서의 급여가 5000이상인 사원의 정보를 조회한다.
+
 
 
 
