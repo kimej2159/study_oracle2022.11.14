@@ -1,4 +1,4 @@
---2Àå. µ¥ÀÌÅÍ Á¶È¸ ¹®±¸
+--2ìž¥. ë°ì´í„° ì¡°íšŒ ë¬¸êµ¬
 
 /*
 DML : SELECT, INSERT, UPDATE, DELETE
@@ -6,8 +6,8 @@ DDL : CREATE, ALTER, DROP
 DCL : GRANT, REVOKE, TRUNCATE
 */
 
-SELECT ÄÃ·³1, ÄÃ·³2
-FROM    Å×ÀÌºí¸í;
+SELECT ì»¬ëŸ¼1, ì»¬ëŸ¼2
+FROM    í…Œì´ë¸”ëª…;
 
 SELECT employee_id, first_name, department_id
 FROM employees;
@@ -15,44 +15,44 @@ FROM employees;
 SELECT *
 FROM eployees;
 
---2.2 SLECT ±¸¹® + Á¶°ÇÀý(+ÇÊÅÍ¸µ) : Æ¯Á¤ Á¶°Ç¿¡ ¸Â´Â µ¥ÀÌÅÍ¸¸ Á¶È¸
+--2.2 SLECT êµ¬ë¬¸ + ì¡°ê±´ì ˆ(+í•„í„°ë§) : íŠ¹ì • ì¡°ê±´ì— ë§žëŠ” ë°ì´í„°ë§Œ ì¡°íšŒ
 
 SELECT employee_id, first_name, department_id       
 FROM employees
 WHERE department_id = 100;
 
---ÀÚµ¿¼­½Ä Àû¿ë : ¿øÇÏ´Â Äõ¸®¸¦ ºí·° ¾º¿î ÈÄ CTRL + F7(=ÀÚµ¿ ¼­½Ä )
---TAB ÀÚÁÖ »ç¿ë!
+--ìžë™ì„œì‹ ì ìš© : ì›í•˜ëŠ” ì¿¼ë¦¬ë¥¼ ë¸”ëŸ­ ì”Œìš´ í›„ CTRL + F7(=ìžë™ ì„œì‹ )
+--TAB ìžì£¼ ì‚¬ìš©!
 
---2.3.3 ºñ±³ ¿¬»êÀÚ
--- ¼ýÀÚ ºñ±³
--- ¹®ÀÚ ºñ±³(p.7)
+--2.3.3 ë¹„êµ ì—°ì‚°ìž
+-- ìˆ«ìž ë¹„êµ
+-- ë¬¸ìž ë¹„êµ(p.7)
 
-[¿¹Á¦ 2-11] tjddl kingÀÎ »ç¿øÀÇ Á¤º¸¸¦ Á¶È¸ÇÏ½Ã¿À
---»ç¿øÀÇ Á¤º¸ : »ç¹ø, ÀÌ¸§, ¼º, ÀüÈ­¹øÈ£, ÀÌ¸ÞÀÏ, ¸Å´ÏÀú, ºÎ¼­, º¸³Ê½º...
---      last_name ÀÌ king ÀÎÁö ºñ±³!! (=°°´Ù, Å©´Ù, ÀÛ´Ù)
+[ì˜ˆì œ 2-11] tjddl kingì¸ ì‚¬ì›ì˜ ì •ë³´ë¥¼ ì¡°íšŒí•˜ì‹œì˜¤
+--ì‚¬ì›ì˜ ì •ë³´ : ì‚¬ë²ˆ, ì´ë¦„, ì„±, ì „í™”ë²ˆí˜¸, ì´ë©”ì¼, ë§¤ë‹ˆì €, ë¶€ì„œ, ë³´ë„ˆìŠ¤...
+--      last_name ì´ king ì¸ì§€ ë¹„êµ!! (=ê°™ë‹¤, í¬ë‹¤, ìž‘ë‹¤)
 
-SELECT employee_id »ç¹ø, last_name ¼º, department_id ºÎ¼­
+SELECT employee_id ì‚¬ë²ˆ, last_name ì„±, department_id ë¶€ì„œ
 FROM employees
 WHERE last_name = 'King'; 
      
 
--- ¹®ÀÚ¿­ ÆÐÅÏ : Æ¯Á¤ Á¶°ÇÀÇ ¹®ÀÚ¸¦ Ã£´Â °úÁ¤
--- ex> ÀüÈ­¹øÈ£, ÀÌ¸ÞÀÏ ==> 010-1234-1234 vs email@naver.com
--- sqlÀº ´ë, ¼Ò¹®ÀÚ¸¦ ±¸ºÐÇÏÁö ¾ÊÀ¸³ª, ¹®ÀÚ µ¥ÀÌÅÍ´Â ±¸ºÐÇÔ
---          (¸í·É¾î)               (¹®ÀÚ°ª)
+-- ë¬¸ìžì—´ íŒ¨í„´ : íŠ¹ì • ì¡°ê±´ì˜ ë¬¸ìžë¥¼ ì°¾ëŠ” ê³¼ì •
+-- ex> ì „í™”ë²ˆí˜¸, ì´ë©”ì¼ ==> 010-1234-1234 vs email@naver.com
+-- sqlì€ ëŒ€, ì†Œë¬¸ìžë¥¼ êµ¬ë¶„í•˜ì§€ ì•Šìœ¼ë‚˜, ë¬¸ìž ë°ì´í„°ëŠ” êµ¬ë¶„í•¨
+--          (ëª…ë ¹ì–´)               (ë¬¸ìžê°’)
 
-[¿¹Á¦ 2-12] ÀÔ»çÀÏÀÌ 2004³â 1¿ù 1ÀÏ ÀÌÀüÀÎ »ç¿øÀÇ Á¤º¸(=»ç¹ø, ÀÔ»çÀÏ,ÀÌ¸§...)
---2004³â 1¿ù 1ÀÏ ÀÌÀü, Ã³À½ºÎÅÍ ~ 2003³â 12¿ù 31ÀÏ ±îÁö
+[ì˜ˆì œ 2-12] ìž…ì‚¬ì¼ì´ 2004ë…„ 1ì›” 1ì¼ ì´ì „ì¸ ì‚¬ì›ì˜ ì •ë³´(=ì‚¬ë²ˆ, ìž…ì‚¬ì¼,ì´ë¦„...)
+--2004ë…„ 1ì›” 1ì¼ ì´ì „, ì²˜ìŒë¶€í„° ~ 2003ë…„ 12ì›” 31ì¼ ê¹Œì§€
 SELECT *
 FROM employees
-WHERE hire_date < '01-JAN-04'; --³â/¿ù/ÀÏ 
+WHERE hire_date < '01-JAN-04'; --ë…„/ì›”/ì¼ 
 
---' ' : ÀÛÀº µû¿ÈÇ¥´Â 1) ¹®ÀÚ¿Í µ¥ÀÌÅÍ / 2)½Ã°£,³¯Â¥ µ¥ÀÌÅÍ¸¦ Ç¥±âÇÒ ¶§ »ç¿ë
---" " : Å« µû¿ÈÇ¥´Â ÄÃ·³ÀÇ º°Äª(=Alisa)À» ÁöÁ¤ÇÒ ¶§, °ø¹éÀÌ ÀÖ´Â ´Ü¾î 
+--' ' : ìž‘ì€ ë”°ì˜´í‘œëŠ” 1) ë¬¸ìžì™€ ë°ì´í„° / 2)ì‹œê°„,ë‚ ì§œ ë°ì´í„°ë¥¼ í‘œê¸°í•  ë•Œ ì‚¬ìš©
+--" " : í° ë”°ì˜´í‘œëŠ” ì»¬ëŸ¼ì˜ ë³„ì¹­(=Alisa)ì„ ì§€ì •í•  ë•Œ, ê³µë°±ì´ ìžˆëŠ” ë‹¨ì–´ 
 
-/* ±³Á¦´ë·Î ½ÇÇàÇß´Âµ¥, ¿Ö ¿À·ù°¡ ³ª´ÂÁö?
-ORA-01858: ¼ýÀÚ°¡ ÀÖ¾î¾ß ÇÏ´Â À§Ä¡¿¡¼­ ¼ýÀÚ°¡ ¾Æ´Ñ ¹®ÀÚ°¡ ¹ß°ßµÇ¾ú½À´Ï´Ù.
+/* êµì œëŒ€ë¡œ ì‹¤í–‰í–ˆëŠ”ë°, ì™œ ì˜¤ë¥˜ê°€ ë‚˜ëŠ”ì§€?
+ORA-01858: ìˆ«ìžê°€ ìžˆì–´ì•¼ í•˜ëŠ” ìœ„ì¹˜ì—ì„œ ìˆ«ìžê°€ ì•„ë‹Œ ë¬¸ìžê°€ ë°œê²¬ë˜ì—ˆìŠµë‹ˆë‹¤.
 01858. 00000 -  "a non-numeric character was found where a numeric was expected"
 *Cause:    The input data to be converted using a date format model was
            incorrect.  The input data did not contain a number where a number was
@@ -61,43 +61,43 @@ ORA-01858: ¼ýÀÚ°¡ ÀÖ¾î¾ß ÇÏ´Â À§Ä¡¿¡¼­ ¼ýÀÚ°¡ ¾Æ´Ñ ¹®ÀÚ°¡ ¹ß°ßµÇ¾ú½À´Ï´Ù.
            elements match in number and type.  Then retry the operation.
 */
 
---¿À´Ã ³¯Â¥ Ãâ·ÂÇÏ±â
+--ì˜¤ëŠ˜ ë‚ ì§œ ì¶œë ¥í•˜ê¸°
 SELECT SYSDATE
 FROM dual;
           
-SELECT employee_id »ç¹ø, last_name ¼º, department_id ºÎ¼­, hire_date ÀÔ»çÀÏ
+SELECT employee_id ì‚¬ë²ˆ, last_name ì„±, department_id ë¶€ì„œ, hire_date ìž…ì‚¬ì¼
 FROM employees
-WHERE hire_date < '04/01/01'; --³â/¿ù/ÀÏ 
+WHERE hire_date < '04/01/01'; --ë…„/ì›”/ì¼ 
 
 
 
---µ¥ÀÌÅÍº£ÀÌ½º ¼³Á¤ º¸±â
---NLS : national language support :  ³ª¶óº°/ ¾ð¾îº° ¼³Á¤ Áö¿ø
--- 1.ÇöÀç NLS ¼¼ÆÃ È®ÀÎ
+--ë°ì´í„°ë² ì´ìŠ¤ ì„¤ì • ë³´ê¸°
+--NLS : national language support :  ë‚˜ë¼ë³„/ ì–¸ì–´ë³„ ì„¤ì • ì§€ì›
+-- 1.í˜„ìž¬ NLS ì„¸íŒ… í™•ì¸
 SELECT *
 FROM V$nls_parameters;
 
--- 2. sqlDeveloper > µµ±¸ > È¯°æ¼³Á¤ > µ¥ÀÌÅÍº£ÀÌ½º >  NLS¸¦ È®ÀÎ
+-- 2. sqlDeveloper > ë„êµ¬ > í™˜ê²½ì„¤ì • > ë°ì´í„°ë² ì´ìŠ¤ >  NLSë¥¼ í™•ì¸
 
-2.3.4 AND, OR, NOT ³í¸® Á¶°Ç ¿¬»êÀÚ
--- ¿©·¯°³ÀÇ Á¶°ÇÀÌ ¿À´Â °æ¿ì ÇÊ¿äÇÑ ¿¬»êÀÚ
--- AND ¿¬»êÀº Á¶°ÇÀÌ ¸ðµÎ TRUEÀÏ ¶§, ÃÖÁ¾ TRUE¸¦ ¹ÝÈ¯ 
--- OR ¿¬»êÀº Á¶°ÇÀÌ ÇÏ³ª¶óµµ TRUEÀÏ ¶§, ÃÖÁ¾ TRUE¸¦ ¹ÝÈ¯ 
--- NOT ¿¬»êÀº Á¶°ÇÀÌ TRUE¸é FALSE¸¦ FALSE¸é TRUE¸¦ ¹ÝÈ¯
+2.3.4 AND, OR, NOT ë…¼ë¦¬ ì¡°ê±´ ì—°ì‚°ìž
+-- ì—¬ëŸ¬ê°œì˜ ì¡°ê±´ì´ ì˜¤ëŠ” ê²½ìš° í•„ìš”í•œ ì—°ì‚°ìž
+-- AND ì—°ì‚°ì€ ì¡°ê±´ì´ ëª¨ë‘ TRUEì¼ ë•Œ, ìµœì¢… TRUEë¥¼ ë°˜í™˜ 
+-- OR ì—°ì‚°ì€ ì¡°ê±´ì´ í•˜ë‚˜ë¼ë„ TRUEì¼ ë•Œ, ìµœì¢… TRUEë¥¼ ë°˜í™˜ 
+-- NOT ì—°ì‚°ì€ ì¡°ê±´ì´ TRUEë©´ FALSEë¥¼ FALSEë©´ TRUEë¥¼ ë°˜í™˜
 
-[¿¹Á¦2-13] 30¹ø ºÎ¼­ »ç¿øÁß ±Þ¿©°¡ 10000 ÀÌÇÏÀÎ »ç¿øÀÇ Á¤º¸¸¦ Á¶È¸ÇÏ½Ã¿À
-(»ç¹ø, ÀÌ¸§, ±Þ¿©, ºÎ¼­ÄÚµå¸¦ ¶æÇÔ)
+[ì˜ˆì œ2-13] 30ë²ˆ ë¶€ì„œ ì‚¬ì›ì¤‘ ê¸‰ì—¬ê°€ 10000 ì´í•˜ì¸ ì‚¬ì›ì˜ ì •ë³´ë¥¼ ì¡°íšŒí•˜ì‹œì˜¤
+(ì‚¬ë²ˆ, ì´ë¦„, ê¸‰ì—¬, ë¶€ì„œì½”ë“œë¥¼ ëœ»í•¨)
 SELECT employee_id, last_name, first_name, Salary, department_id
 FROM employees
 WHERE department_id=30 
 AND Salary <= 10000;
 
---Q. Den ÀÌ¶ó´Â »ç¶÷, »ç¹øÀÌ 114 ÀÎ »ç¶÷ÀÇ Á¤º¸¸¦ Ãß°¡ Á¶È¸ÇÏ½Ã¿À
+--Q. Den ì´ë¼ëŠ” ì‚¬ëžŒ, ì‚¬ë²ˆì´ 114 ì¸ ì‚¬ëžŒì˜ ì •ë³´ë¥¼ ì¶”ê°€ ì¡°íšŒí•˜ì‹œì˜¤
 SELECT employee_id, last_name, first_name, Salary, department_id
 FROM employees
 WHERE employee_id = 114;
 
-[¿¹Á¦ 2-13] 30¹ø ºÎ¼­ »ç¿øÁß ±Þ¿©°¡ 10000 ÀÌÇÏ¸é¼­ 2005³â ÀÌÀü¿¡ ÀÔ»çÇÑ Á÷¿øÀÇ Á¤º¸¸¦ Á¶È¸ÇÏ½Ã¿À
+[ì˜ˆì œ 2-13] 30ë²ˆ ë¶€ì„œ ì‚¬ì›ì¤‘ ê¸‰ì—¬ê°€ 10000 ì´í•˜ë©´ì„œ 2005ë…„ ì´ì „ì— ìž…ì‚¬í•œ ì§ì›ì˜ ì •ë³´ë¥¼ ì¡°íšŒí•˜ì‹œì˜¤
 SELECT 'hanul' company, employee_id, last_name, first_name, Salary, department_id
 FROM employees
 WHERE department_id = 30
@@ -105,9 +105,9 @@ and Salary <= 10000
 and hire_date <= '04-12-31';
 
 
--- OR ¿¬»êÀº Á¶°ÇÀÌ ÇÏ³ª¶óµµ TRUEÀÏ ¶§, ÃÖÁ¾ TRUE¸¦ ¹ÝÈ¯ 
-[¿¹Á¦ 2-15] 30¹ø ºÎ¼­³ª 60¹ø ºÎ¼­¿¡ ¼ÓÇÑ »ç¿øÀÇ Á¤º¸¸¦ Á¶È¸ÇÏ½Ã¿À
---ºÎ¼­ VS »ç¿øÀÇ °ü°è <---> ¿À¶óÅ¬ RDBMS(Reational DBMS, °ü°èÇü µ¥ÀÌÅÍº£ÀÌ½º ½Ã½ºÅÛ) <---> Å×ÀÌºí ~ Å×ÀÌºí °ü°è
+-- OR ì—°ì‚°ì€ ì¡°ê±´ì´ í•˜ë‚˜ë¼ë„ TRUEì¼ ë•Œ, ìµœì¢… TRUEë¥¼ ë°˜í™˜ 
+[ì˜ˆì œ 2-15] 30ë²ˆ ë¶€ì„œë‚˜ 60ë²ˆ ë¶€ì„œì— ì†í•œ ì‚¬ì›ì˜ ì •ë³´ë¥¼ ì¡°íšŒí•˜ì‹œì˜¤
+--ë¶€ì„œ VS ì‚¬ì›ì˜ ê´€ê³„ <---> ì˜¤ë¼í´ RDBMS(Reational DBMS, ê´€ê³„í˜• ë°ì´í„°ë² ì´ìŠ¤ ì‹œìŠ¤í…œ) <---> í…Œì´ë¸” ~ í…Œì´ë¸” ê´€ê³„
 SELECT 'eunji' company, employee_id, last_name, first_name, Salary, department_id
 FROM employees
 WHERE department_id = 30
@@ -118,4 +118,4 @@ OR department_id = 60;
 
 
 
--- NOT ¿¬»êÀº Á¶°ÇÀÌ TRUE¸é FALSE¸¦ FALSE¸é TRUE¸¦ ¹ÝÈ¯
+-- NOT ì—°ì‚°ì€ ì¡°ê±´ì´ TRUEë©´ FALSEë¥¼ FALSEë©´ TRUEë¥¼ ë°˜í™˜
