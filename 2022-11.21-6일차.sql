@@ -126,16 +126,95 @@ SELECT ROUND(123.45678) R1,
        ROUND(123.45678, 0) R3
 FROM dual;
 
+--======================================================
+--i가 음수인 경우 정수부 i번째 자리에서 반올림 한다.
+--======================================================
+
+
 [예제 3-4]
-select 
+SELECT ROUND(123.456789, 2) R1,     -- 소수부 2번째 자리에서 만올림
+       ROUND(123456.789, -2) R2     --정수부 2번째 자리에서 반올림
+FROM dual;
+
+--TRUNC(n [,i]) : round 함수와 같은 방식이지만, 
+--ROUND(반올림) VS TRUNC(버림)
+--TRUNCATE TABLE 테이블명 : 테이블의 데이터를 모두 버림(=삭제) 단, 구조/컬럼은 남김
+
+[예제 3-5]
+SELECT TRUNC(123.456789) T1,
+        TRUNC(123.456789, 2) T2,
+        TRUNC(123.456789, -2) T3,
+        TRUNC(123456.789, -2) T4
+FROM dual;
+
+--CEILL(n) : n과 같거나 큰, 가장 작은 정수 반환하는 함수
+-- 무조건 올림된 결과를 반환한느 함수
+[예제3-6]
+select CEIL(0.12345) C1,
+        CEIL(123.25) C2
+FROM    dual;
+
+--FLOOR(n) : n 과 같거나 작은 가장 큰 정수를 반환하는 함수
+-- 무조건 내림된 결과를 반환하는 함수
+
+select FLOOR(0.12345) C1,
+        FLOOR(123.25) C2
+FROM    dual;
+
+--MOD(m, n ) : m을 n으로나눈 나머지 값을 반환하는 함수
+--n에 0이 오면, m의 값을 그대로 반환한다.
+--프로그래밍 언너 : 0으로 나누면 ==> zero divide Error 발생
+
+select MOD(2,0) M1,
+        MOD(4,2) M2
+FROM dual;
+
+[예제 3-4]
+select MOD(17,4) M1, -- 17 = 4*4+1
+        MOD(17,-4) M2, -- 17 = -4*-4+1
+        MOD(-17,-4) M2, -- -17 = -4*4-1
+        MOD(17,0) M2 --17 = 0* + 17
+FROM dual;        
+
+[연습문제 3-1]
+1. 사원테이블에서 100번 부서와 110번 사원에 대해 사번, 이름, 급여와 15% 인상된 급여를 조회하는 쿼리문을 작성한다
+select employee_id, first_name, salary,
+        round(salary + salary*0.15) " increase salary1",
+        round(salary + salary *0.15, 0) " increase salary2",
+        trunc(salary + salary *0.15, 1) " increase salary3",
+        trunc(salary + salary *0.15, 2) " increase salary4",
+        ceil(salary + salary *0.15, 0) "ceils5",
+        floor(salary + salary * 0.15) "floor6"
+from employees
+where department_id in(100, 110)
+order by 1;
 
 
 
+--3.2 문자함수(p.22)
+--CONCAT(CHAR1, CHAR2) :  파라미터로 받은 두 문자열을 연결하여 결과를 반환하는 함수
+-- || : 문자열 연결 연산자
+[예제 3-9]
+SELECT CONCAT('hello', 'oracle') CONTROL,       --문자열 연결 함수를 씀
+'HELLO'||'ORCLE' CONCAT2                        --문자열 연결 연산자를 씀
+FROM DUAL;
+
+--INITCAP(CHAR) :  파라미터로 받은 알파벳 단어의 첫글자를 대문자로 하여 반환하는 함수
+--UPPER(CHAR) : 파라미터로 받은 알파벳 모두를 대문자로 하여 반환하는 함수
+--LOWER(CHAR) : 파라미터로 받은 알파벳 모두를 소문자로 하여 반환하는 함수
+
+[예제3-10]
+SELECT INITCAP('I am a boy') init1,
+upper('I am a boy') upper2,
+LOWER('I am a boy') lower3
+from dual;
+
+--LPAD, RPAD 
+--LEFT RIGHT
+--PAD
 
 
 
-
---3.2 문자함수
 --3.3 날짜함수
 --3.4 변환함수
 --3.5 null 관련 함수
