@@ -213,7 +213,31 @@ from dual;
 --LEFT RIGHT
 --PAD
 
+select LPAD('page 1' , 15,'*.') "LPAD example",
+LENGTH(LPAD('page 1' , 15,'*.')) " LPAD  example lengTh",
+Lengthb(lpad('page 1' , 15,'*.')) " LPAD example bytes1",
+Lengthb(lpad('페이지 1' , 15,'*.')) " LPAD example bytes2"
+from dual;
 
+
+--제거하고자 하는 문자[,CHAR2] 생략시 기본값으로 공백문자 한 개가 사용된다.
+--LTRIM(char1, [char2]) : 왼쪽에서 ~char1에서 char2로 지정한 문자를 제거한 결과를 반환
+[예제3-12]
+select '[' || LTRIM('   ABCDEFG     ') || ']' RLTRM1,
+        '[' || LTRIM('   ABCDEFG     ',' ') || ']' RLTRM2,
+        LTRIM('ABCDEFG','AB') LTRIM3,
+     LTRIM('ABCDEFG','BA') LTRIM4,
+     LTRIM('ABCDEFG','BC') LTRIM5
+FROM dual;
+
+select '[' || RTRIM('   ABCDEFG     ') || ']' RLTRM1,
+        '[' || RTRIM('   ABCDEFG     ',' ') || ']' RLTRM2,
+        RTRIM('ABCDEFG','FG') RLTRM3,
+     RTRIM('ABCDEFG','FE') RLTRM4,
+     RTRIM('ABCDEFG','GA') RLTRM5
+FROM dual;
+
+--TRIM() : 방향을 좌, 우, 양쪽에서 ~char1에서  char2로 지정한 문자를 제거한 결과를 반환
 
 --3.3 날짜함수
 --3.4 변환함수
