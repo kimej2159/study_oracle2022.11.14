@@ -445,8 +445,44 @@ select TO_CHAR(TO_CHAR ('0630'),'RR/DD/YY') char4
 from dual;
 
 
---3.5 null 관련 함수
+[예제 3-27] -- 기본 데이터 베이스 환경설정 : RR/MM/DD
+select TO_CHAR(sysdate, 'YYYY-MON-DD') FMT1,
+       TO_CHAR(sysdate, 'RR/MM/DD HH:MI:SS') FMT2,
+       TO_CHAR(sysdate, 'YY-MM-DD DAY') FMT3
+FROM dual;
 
+[예제 3-28]
+SELECT TO_CHAR(12345, '9999999') NUM_FMT1,   
+        TO_CHAR(12345, '0999999') NUM_FMT2,
+        TO_CHAR(123.45, '$99999.99') NUM_FMT3,
+        TO_CHAR(12345, 'L9,999,999') NUM_FMT4
+FROM dual;
+
+SELECT employee_id, last_name, To_CHAR(salary*12, '$9,999,99') "ANNUAL SALARY"
+FROM employees
+ORDER BY "ANNUAL SALARY" DESC;
+
+-- TO_NUMBER() : 문자를 숫자로 변환하여 그 결과를 반환
+SELECT 1 + '1' SUM
+FROM dual;
+
+SELECT TO_NUMBER('12345') NUM1,
+        TO_NUMBER('123.45') NUM2
+FROM dual;       
+
+--TO_DATE(char, [fmt])
+-- 문자 데이터를 날짜 데이터로 변환한 결과를 반환
+
+SELECT TO_DATE('2013-05-27') DATE1,
+        TO_DATE('2013-06-27 11:12:35','YYYY/MM/DD HH:MI:SS AM') DATE2
+FROM dual;
+alter session set 
+
+
+
+
+
+--3.5 null 관련 함수
 --3.6 descode와 case
 
 
