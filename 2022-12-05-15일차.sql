@@ -372,3 +372,143 @@ where id =1;
 --삭제하세요
 delete from TMP;        --rollback 가능 commit 수동
 TRUNCATE TABLE TMP      -- rollback 불가능 commit 자동
+
+
+[예제9-4] 부서테이블의 데이트를 복사하여 dept1 테이블을 생성하시오
+-- CTAS : create table 테이블명 as select 이하~      / 테이블 생성
+-- ITAS : INSERT INTO 테이블명 SELECT 이하 ~       / 데이터 입력
+
+rollback;
+
+CREATE TABLE dept1 AS
+SELECT *
+FROM departments;
+
+desc dept1;
+
+select *
+from dept1;
+
+[예제 9-5] 사원테이블의 사번, 이름, 입사일 컬럼의 데이터를 복사해서 emp20으로 생성
+DROP TABLE EMP20;
+create table EMP20 as
+select employee_id, first_name, hire_date
+from employees
+
+desc emp20;
+
+select *
+from employees;
+
+[예제 9-6] 부서테이블을 데이터 없이 복사하여(=구조만 복사) dept2테이블을 생성
+-- where 조건절을 거짓 조건을 만들어, 복사되는 데이터가 없도록 테이블을 생성하는 방법
+
+create table dept2 as
+select *
+from departments
+where 1 = 2;
+
+desc dept2;
+
+select *
+from dept2;
+
+9.3 ALTER TABLE / 테이블의 구조 변경 명령
+--데이터가 없다면? 테이블을 잘못 생성했을 때, 삭제하고 다시 생성
+-- 데이터가 있을경우? 테이블의 구조, 제약조건, BYTE 등을 변경
+--                새로운 컬럼 추가시, 당연히 데이터는 NULL 세팅
+
+--# 테이블의 구조를 변경하는 명령(컬럼추가, 컬럼 삭제, 컬럼 변경-이름, 크기)
+
+--9.3.1 컬럼 추가
+-- 테이블의 컬럼을 추가하는 형식
+-- ALTER TABLE 테이블명
+-- ADD (컬럼명1 데이터타입1, 컬럼명2 데이터 타입2,...)
+
+
+DESC emp20;
+desc dept2;
+
+
+[예제9-7]EMP20 테이블에 숫자타입 급여 컬럼, 문자타입 업무코드 컬럼을 추가하시오
+DESC EMP20;
+/*
+이름          널?       유형           
+----------- -------- ------------ 
+EMPLOYEE_ID          NUMBER(6)    
+FIRST_NAME           VARCHAR2(20) 
+HIRE_DATE   NOT NULL DATE
+--------- 추가할 칼럼 --------------
+SALARY               NUMBER(9,2)
+JOB_ID               CHAR(6)
+*/
+
+SELECT *
+FROM jobs;
+
+
+ALTER TABLE emp20
+ADD (salary NUMBER(20,2), job_id VARCHAR2(10));
+
+update emp20
+set salary=24000,
+    job_id='AD_PRES'
+
+--number :  숫자형 VS NUMBER(전체자릿수, 소수자릿수) : 실수형[정수부 : 전체 - 소수부 자릿수]
+
+DESC emp20;
+
+alter table emp20
+add (gender CHAR(1) NOT NULL);      -- NOT NULL 제약조건
+--오류 보고 -
+--ORA-01758: 테이블은 필수 열을 추가하기 위해 (NOT NULL) 비어 있어야 합니다.
+--01758. 00000 -  "table must be empty to add mandatory (NOT NULL) column"
+
+--해결 > 기존 테이블의 데이터를 비우고, alter table
+TRUNCATE TABLE emp20;
+
+
+
+-- 9.3.2 컬럼의 변경
+-- ALTER TABLE 테이블명
+-- MODIFY (컬럼명1 데이터타입1, 컬럼명2 데이터타입1,....)
+
+-- 테이블의 행이 없거나 컬럼이 NULL 값만 포함하고 있어야 데이터 타입을 변경할 수 있다 
+-- 컬럼에 저장되어 있는 데이터의 크기 이상까지 데이터의 크기를 줄일 수 있다
+
+[예제9-8] EMP20 테이블의 급여 컬럼과 업무코드 컬럼의 데이터 사이즈를 변경한다
+
+
+--9.3.3 컬럼으 ㅣ삭제
+-- 테이블의 컬럼을 삭제하는 형식
+-- alter tabel 테이블명
+--drop column 컬럼명;
+
+[예제 9-9] emp20 테이블 업무코드 컬럼을 삭제하시오
+
+desc emp 20;
+alter table emp20
+drop colum salary;
+select * from emp20;
+
+alter table emp20
+add (salary number(8,20), job_id VARCHAR2(7));
+
+------------------------------------------
+-- DML : COMMIT, ROLLBACK [개발자가]
+-- DDL : AUTO COMMIT[자동커밋] / CREATE, ALTER, DEOP, TRANCATE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
