@@ -47,7 +47,11 @@ VALUES(1, '보이지 않는 위험(THE PHANTOM MENACE)',1999);
 INSERT INTO star_wars
 VALUES(2, '클론의 습격(ATTACK OF THE CLONES)', 2002);
 INSERT INTO star_wars
-VALUES(3, 'TLTMDML QHRTN(REVENGE OG THE SITH)', 2005);
+VALUES(3, '시스의 복수(REVENGE OG THE SITH)', 2005);
+
+UPDATE star_wars
+SET episode_name = '시스의 복수(REVENGE OG THE SITH)'
+WHERE episode_id= 3;
 
 SELECT *
 FROM STAR_WARS
@@ -176,6 +180,8 @@ SET master_id = ( SELECT character_id
                     from characters
                     where character_name = '다쓰 시디어스')
 where character_name IN ('다쓰 베이더', '다쓰 몰');
+
+rollback;
 
 UPDATE characters
 SET master_id = ( SELECT character_id

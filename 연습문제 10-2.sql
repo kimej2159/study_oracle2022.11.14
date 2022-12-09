@@ -146,6 +146,114 @@ AND ch.role_id = 1001; -- 알면, 모르면 서브쿼리
 COMMIT;
 
 
+--[2022-12-09]
+
+SELECT c.character_name, NVL(c.character_name, '제다이 중의 제다이') masters
+FROM characters c, characters d, roles r
+where c.master_id = d.character_id(+)
+and c.role_id = r.role_id    
+and r.role_name = '제다이'
+ORDER BY 1;                      -- 7줄
+
+commit;
+
+
+--8. 역할이 제다이에 해당하는 배역들의 배역이름, 이메일, 마스터의 이메일을 조회하여 
+-- 제다이 기사의 이메일에는 제다이 기사의 이메일을, 없으면 마스터의 이메일을 사용하는 
+-- EMAILS 라는 컬럼까지 추가하여 조회하는 쿼리문 작성
+-- P.92 표를 참조
+select *
+from characters;
+
+SELECT c.character_name, c.email JEDAI_EMAIL, m.email MASTER EMAIL
+-- NVL(c.character_name, '제다이 중의 제다이') masters
+FROM characters c, characters m, roles r
+where c.master_id = m.character_id(+)
+and c.role_id = r.role_id    
+and r.role_name = '제다이'
+ORDER BY 1;                 
+
+SELECT  c.character_name, c.email JEDAI_EMAIL, m.email MASTER_EMAIL
+--        NVL2(c.email, c.email, m.email) MASTER_EMAIL
+FROM    characters c, characters m, roles r
+WHERE   c.master_id = m.character_id(+)
+AND     c.role_id = r.role_id
+AND     r.role_name = '제다이'
+ORDER BY 1;
+
+
+select *
+from characters;
+
+-- 9. 스타워지 시리즈별로 출연한 배우의 수를 파악하고자 한다
+-- 에피소드 이름, 출연 배우 수, 개봉년도 순으로 조회하는 쿼리문 작성
+--      [select]           
+-- star wars : 영화정보/ 에피소드 아이디, 영화 제목, 개봉 년도 
+-- casting : 캐스팅 정보/ 에피소드 아이디, 캐릭터 아이디 , 실제 배우 이름
+
+select s.episode_name, COUNT(*) cnt
+from star_wars s, casting c
+where s.episode_id = c.episode_id
+group by s.episode_name, s.open_year
+order by 1;
+
+
+
+-- 10. 전체 시리즈에서 각 배우별 배역이름, 실제 이름, 출연횟수를 조회하는데 출연횟수가 
+-- 많은 배역이름, 실제 이름 순으로 조회하는 쿼리문을 작성한다.
+--characters : 배역이름
+-- casting : 실제 이름
+-- star_wars : 에피소드 명, 개봉 년도
+select ch.character_name 배역이름, ca.real_name 실제이름, COUNT(*)
+from characters ch, casting ca
+where ch.character_id = ca.character_id
+group by ch.character_name, ca.real_name;
+
+
+-- 11.  10번을 참고하여 출연 횟수가 많은 상위 3명의 배역명, 실명, 출연횟수 출력
+-- rownum : 쿼리 실행 순서대로~ (상위, 하위)
+-- RANK() OVER (ORDER BY 절), DENSE_RANK() OVER(ORDER BY 절)
+-- 1,2,3,4,5,6....           VS 1,2,3,4,5....
+-- 동순위 다음 순위 건너 뜀           VS 동순위 다음 순위도 표현 
+-- 그룹함수의 조건 : HAVING 표시 
+
+
+select ch.character_name 배역이름, ca.real_name 실제이름, COUNT(*)
+from characters ch, casting ca
+where ch.character_id = ca.character_id
+group by ch.character_name, ca.real_name;
+
+-- 11-1. 교재에서 사용한 방법 : rownum
+
+SELECT ROWNUM ranking, e.*
+FROM ( select ch.character_name 배역이름, ca.real_name 실제이름, COUNT(*)
+        from characters ch, casting ca
+        where ch.character_id = ca.character_id
+        group by ch.character_name, ca.real_name 
+        ORDER BY 1 DESC) e -- 인라인 뷰 : 실제로는 존재하지 않는 가상의 임의의 테이블
+where rownum <= 3;
+
+-- 11-2. RANK() 또는 DENSE_RANK() 사용한 방법
+SELECT  *
+FROM    (   SELECT  DENSE_RANK() OVER(ORDER BY COUNT(*)) ranking, ch.character_name 배역이름, ca.real_name 실제이름, count(*) 출연횟수
+            FROM    characters ch, casting ca
+            WHERE   ch.character_id = ca.character_id
+            GROUP BY ch.character_name, ca.real_name    )
+WHERE   ROWNUM <= 3;  
+
+-- 12. 시리즈별 몇명의 배우가 (=실제 배우) 출연했는지 조회하고자 한다
+-- 에비소드 시리즈 번호, 에비폿드 이름, 출연배우수를 조회하는데 출연배우수가 많은 순으로 조회
+SELECT s.episode_id, s.episode_name, count(*) actor_count
+from star_wars s, casting c
+where c.episode_id = s.episode_id
+group by s.episode_id, s.episode_name
+order by actor_count desc;      -order by 3 desc;
+
+commit;
+
+
+
+
 
 
 
