@@ -204,7 +204,7 @@ values(null, '개발부');
 select *
 from dept_test; 
 
-
+drop table dept_test;
 
 -- 2) 테이블 생성 후 추가
 -- 2-1. 기존 dept_test_id_pk 제약조건을 삭제
