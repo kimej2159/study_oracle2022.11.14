@@ -168,7 +168,7 @@ select *
 from emp;
 
 INSERT INTO emp
-values(201701, 'bill', 'clerk', '2017-10-02' , 1000, 20);
+values(201701, 'Bill', 'Clerk', '2017-10-02' , 1000, 20);
 
 drop table emp;
 
@@ -179,7 +179,7 @@ TRUNCATE TABLE emp;
 -- 서브쿼리 
 update emp
 SET salary = 1400
-where JOB = 'clerk';
+where JOB = 'Clerk';
 
 20. EMP 테이블에서 가장 많은 급여를 받는 사원의 정보를 삭제하시오
 delete from emp
