@@ -47,7 +47,10 @@ and employee_id between 150 and 160  ;
  답 : or가 아니라 and가 들어가야함
 
 6. 함수를 사용한 아래의 sql 문에서 그 결과값이 다른 함수는?
-Select 함수(3.46)
+Select trunc(3.46)
+from dual;
+
+Select floor(3.46)
 from dual;
 
 1. trunc    2.ceil    3.floor   4.round
@@ -89,11 +92,15 @@ where e.department_id = 30;
  답 : 4번
 
 10.다음 sql 문의 결과로 조회되는 데이터는 무엇인가?
-select  first_name ||' '||last_name name
+select  last_name||' '||first_name name
 from employees
-where last_name || first_name like '_z%'
+where last_name || first_name like '%z_'
 
  답 : 사원의 성명이 두 번째 문자가 z인 사원들의 성명
+ 
+ select *
+ from employees
+ where department_id != null;
  
 11.다음의 두 sql은 nvl 함수를 사용한 문장을 case문으로 바꾸어 표현한 것이다
 아래 case 문의 [] 안에 들어갈 내용을 작성하시오
@@ -118,6 +125,8 @@ from employees
  JOIN - INNER JOIN, CROSS JOIN, OUTER JOIN, SELF JOIN
 
 13. 아래와 같은 dept 테이블을 생성하는 명령문을 작성하시오
+
+
 14. EMP 테이블에서 2001년도에 입사한 사원들의 이름, 급여, 부서번호, 입사일자를 조회하여
 최근 입사한 순으로 정렬하시오
 SELECT FIRST_NAME, SALARY, department_id, hire_date
@@ -164,13 +173,6 @@ CREATE TABLE emp (
     CONSTRAINT emp_EMPNO_pk PRIMARY KEY (EMPNO) -- 테이블 레벨
 );
 
-select *
-from emp;
-
-INSERT INTO emp
-values(201701, 'Bill', 'Clerk', '2017-10-02' , 1000, 20);
-
-drop table emp;
 
 TRUNCATE TABLE emp;
 
@@ -185,23 +187,105 @@ where JOB = 'Clerk';
 delete from emp
 where salary = (select max(salary) from emp);
 
+<15번>
+CREATE TABLE DEPT (
+    DEPTNO number(10),
+    DNAME varchar(20),
+    CITY varchar(20),
+    constraint DEPT_DEPTNO_pk primary key(DEPTNO)
+    );
+insert into DEPT
+values(10, 'Accounting', 'New York');
+insert into DEPT
+values(20, 'Research', 'Dallas');
+insert into DEPT
+values(30, 'Sales', 'Chicago');
+
+select *
+from DEPT;
+
+INSERT INTO emp
+values(201701, 'Bill', 'Clerk', '2017-10-02' , 1000, 20);
+
+drop table DEPT;
 
 
 
+create table EMP (
+    EMPNO number(10) NOT NULL,
+    NAME varchar(20),
+    JOB varchar(20),
+    HIREDATE VARCHAR2(20),
+    SALARY NUMBER(10),
+    DEPTNO NUMBER(10),    
+    CONSTRAINT EMP_EMPNO_pk PRIMARY KEY (EMPNO) 
+);
+
+select *
+from EMP
+
+drop table EMP;
+
+INSERT INTO EMP
+values(200103, 'Jones', 'Manager', '2001-04-02', 2975, 20);
+INSERT INTO EMP
+values(200104, 'Blake', 'Manager', '2001-05-01' , 2850, 30);
+INSERT INTO EMP
+values(200105, 'Clark', 'Manager', '2001-06-09', 2450, 10);
+INSERT INTO EMP
+values(200106, 'King', 'President', '2001-11-17', 5000, 10);
+INSERT INTO EMP
+values(200201, 'Miller', 'Cleck', '2002-01-23', 1300, 10);
+INSERT INTO EMP
+values(200202,'Allen', 'Salesman', '2002-02-20', 1600, 30);
+INSERT INTO EMP
+values(200203, 'Ford', 'Analyst', '2002-12-03', 3000, 20);
+INSERT INTO EMP
+values(200701, 'Adams', 'Clerk', '2007-02-23', 1100, 20);
+INSERT INTO EMP
+values(200702, 'Ward', 'Salesman', '2007-05-22', 1250, 30);
+INSERT INTO EMP
+values(200703,'James', 'Clerk', '2007-12-03', 950, 30);
 
 
+<16번>
+select *
+from EMP
+where name = 'Allen';
 
+<17번>
+select name, salary, job
+from EMP
+where salary >= 2000;
 
+<18번>
+select count(EMPNO), round(AVG(SALARY),2)
+from EMP;
 
+<19번>
+select name, salary, deptno, hiredate
+from EMP
+where hiredate like '2001%'
+ORDER BY hiredate desc;
 
+<20번>
+select e.name, e.salary, d.dname
+from EMP e, DEPT d
+WHERE   e.deptno = d.deptno;
 
+<21번>
+insert into EMP
+values(201701,'Bill', 'Clerk', '2017-10-02', 1000, 20);
 
+select *
+from EMP;
 
+<22번>
+update EMP
+SET salary = 1400
+where JOB = 'Manager';
 
-
-
-
-
-
+delete from EMP
+where salary = (select min(salary) from emp);
 
 
